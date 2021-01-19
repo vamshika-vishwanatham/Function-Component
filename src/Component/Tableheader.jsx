@@ -2,7 +2,7 @@ import React from 'react';
 
 const Tableheader = () => {
     return (
-        <div>
+        
             <tr>
             <th>Id</th>
             <th>Email</th>
@@ -10,7 +10,7 @@ const Tableheader = () => {
             <th>Last-Name</th>
             <th>Profile</th>
             </tr>
-        </div>
+        
     )
 };
 

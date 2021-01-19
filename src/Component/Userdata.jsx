@@ -5,14 +5,18 @@ import Tableheader from './Tableheader';
 function Userdata(props) {
     return (
         <div>
-           <table id="tabledata">
-                <Tableheader/>
-                {
-                    props.Data?.map(user => { 
-                        return <Tabledata userProfile={user}/>
-                    })
-                }
-           </table>
+            <table className="table-data" id="usertable">
+                <thead >
+                    <Tableheader />
+                </thead>
+                <tbody >
+                    {
+                        props.Data && props.Data.data?.map(user => {
+                            return <Tabledata userProfile={user} />
+                        })
+                    }
+                </tbody>
+            </table>
         </div>
     );
 }

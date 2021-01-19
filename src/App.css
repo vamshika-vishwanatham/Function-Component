@@ -1,21 +1,17 @@
 .App {
   text-align: center;
 }
-
-#tabledata{
-  margin-top:30px;
-  /* border:1px solid lightblue; */
+.table-data{
+  margin-top: 30px;
+  margin-left: 250px;
 }
 
-#tabledata td, #tabledata th {
-  /* border: 1px solid #ddd; */
-  padding: 8px;
-}
-
-#tabledata th {
-  padding-left: 50px;
-  padding-right: 50px;
-  text-align: center;
+#usertable th, #usertable td{
+/* padding: 45px; */
+padding-top: 5px;
+padding-bottom: 5px;
+padding-right: 70px;
+padding-left: 10px;
 }
 
 .loginform{

@@ -1,40 +1,67 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { postUserDetails } from '../Actions/UserdataActions';
 
-function Login(props) {
+const Login = (props)=> {
 
-    const [username,setusername]=useState()
-    const [password,setpassword]=useState()
+    const [username,setusername]=useState("")
+    const [password,setpassword]=useState('')
  
-    const handleUsername = (username) =>{
-        setusername(username)
-    }
+    // const handleUsername = (username) =>{
+    //     setusername(username)
+    // }
  
-    const handlePassword = (password) =>{
-        setpassword(password)
-    }
+    // const handlePassword = (password) =>{
+    //     setpassword(password)
+    // }
+
+    
+    const responseState = useSelector( state=> state.fetchUserData);
+    const authToken = responseState.token?.data?.token;
+    const loginStatus = responseState.loginSuccess;
 
     const history = useHistory();
-    function handleOnClick(){
-        history.push("/home",{name:username})
+    const dis = useDispatch();
+    const handleOnClick =()=>{
+        debugger
+        if(username && password)
+        {
+            return dis(postUserDetails(username,password));
+        }
+        else{
+        
+            alert("please enter email or password")
+        }
     }
 
-    function validateForm(){
-        return username.length>0 && password.length>0
-    }
+    useEffect(() =>{
+        if(authToken == "QpwL5tke4Pnpja7X4"){
+            history.push("/home",{userName:username});
+        }
+        else if(loginStatus == false){
+            alert("Please enter valid username and password");
+            setusername('');
+            setpassword('')
+        }
+        else{
+            history.push('/')
+        }
+    },[authToken])
+    
     return (
             <div className="loginform">
                     <form className="formtabel" onSubmit={handleOnClick}>
                         <div>
                             <label>UserName: </label>
-                            <input type="email"  onClick={()=>handleUsername(username)} />
+                            <input type="email" value={username} onChange={(e)=>{setusername(e.target.value)}} />
                         </div><br />
                         <div>
                             <label>Password: </label>
-                            <input type="password"  onClick={()=>handlePassword(password)} />
+                            <input type="password" value={password} onChange={(e)=>{setpassword(e.target.value)}} />
                         </div><br />
                         <div>
-                            <button type="submit" style={{backgroundColor:"green",color:"white",padding:"5px"}} disabled={!validateForm}>login</button>
+                            <button type="submit" style={{backgroundColor:"green",color:"white",padding:"5px"}}>login</button>
                         </div>
                     </form>
                 </div>
